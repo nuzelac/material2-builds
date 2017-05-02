@@ -1,6 +1,6 @@
-import { Injector, InjectionToken } from '@angular/core';
+import { Injector, OpaqueToken } from '@angular/core';
 import { MdDialogRef } from './dialog-ref';
-export declare const MD_DIALOG_DATA: InjectionToken<any>;
+export declare const MD_DIALOG_DATA: OpaqueToken;
 /** Custom injector type specifically for instantiating components with a dialog. */
 export declare class DialogInjector implements Injector {
     private _parentInjector;

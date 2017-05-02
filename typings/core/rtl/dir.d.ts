@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { ModuleWithProviders, EventEmitter } from '@angular/core';
 export declare type LayoutDirection = 'ltr' | 'rtl';
 /**
  * Directive to listen for changes of direction of part of the DOM.
@@ -17,4 +17,6 @@ export declare class Dir {
     value: LayoutDirection;
 }
 export declare class RtlModule {
+    /** @deprecated */
+    static forRoot(): ModuleWithProviders;
 }

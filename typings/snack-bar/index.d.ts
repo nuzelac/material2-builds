@@ -1,4 +1,7 @@
+import { ModuleWithProviders } from '@angular/core';
 export declare class MdSnackBarModule {
+    /** @deprecated */
+    static forRoot(): ModuleWithProviders;
 }
 export * from './snack-bar';
 export * from './snack-bar-container';

@@ -1,7 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, OnDestroy, Renderer2 } from '@angular/core';
+import { ChangeDetectorRef, ElementRef, EventEmitter, Renderer, AfterViewInit, OnDestroy } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { FocusOriginMonitor, MdRipple } from '../core';
-import { CanDisable } from '../core/common-behaviors/disabled';
+import { MdRipple, FocusOriginMonitor } from '../core';
 /**
  * Provider Expression that allows md-checkbox to register as a ControlValueAccessor.
  * This allows it to support [(ngModel)].
@@ -29,9 +28,6 @@ export declare class MdCheckboxChange {
     /** The new `checked` value of the checkbox. */
     checked: boolean;
 }
-export declare class MdCheckboxBase {
-}
-export declare const _MdCheckboxMixinBase: (new (...args: any[]) => CanDisable) & typeof MdCheckboxBase;
 /**
  * A material design checkbox component. Supports all of the functionality of an HTML5 checkbox,
  * and exposes a similar API. A MdCheckbox can be either checked, unchecked, indeterminate, or
@@ -40,7 +36,7 @@ export declare const _MdCheckboxMixinBase: (new (...args: any[]) => CanDisable) 
  * have the checkbox be accessible, you may supply an [aria-label] input.
  * See: https://www.google.com/design/spec/components/selection-controls.html
  */
-export declare class MdCheckbox extends _MdCheckboxMixinBase implements ControlValueAccessor, AfterViewInit, OnDestroy, CanDisable {
+export declare class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestroy {
     private _renderer;
     private _elementRef;
     private _changeDetectorRef;
@@ -72,6 +68,9 @@ export declare class MdCheckbox extends _MdCheckboxMixinBase implements ControlV
     align: 'start' | 'end';
     /** Whether the label should appear after or before the checkbox. Defaults to 'after' */
     labelPosition: 'before' | 'after';
+    private _disabled;
+    /** Whether the checkbox is disabled. */
+    disabled: boolean;
     /** Tabindex value that is passed to the underlying input element. */
     tabIndex: number;
     /** Name value will be applied to the input element if present */
@@ -84,10 +83,6 @@ export declare class MdCheckbox extends _MdCheckboxMixinBase implements ControlV
     value: string;
     /** The native `<input type="checkbox"> element */
     _inputElement: ElementRef;
-    _labelWrapper: ElementRef;
-    /** Whether the checkbox has label */
-    _hasLabel(): boolean;
-    /** Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor. */
     _ripple: MdRipple;
     /**
      * Called when the checkbox is blurred. Needed to properly implement ControlValueAccessor.
@@ -101,19 +96,25 @@ export declare class MdCheckbox extends _MdCheckboxMixinBase implements ControlV
     private _color;
     private _controlValueAccessorChangeFn;
     /** Reference to the focused state ripple. */
-    private _focusRipple;
-    constructor(_renderer: Renderer2, _elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _focusOriginMonitor: FocusOriginMonitor);
+    private _focusedRipple;
+    /** Reference to the focus origin monitor subscription. */
+    private _focusedSubscription;
+    constructor(_renderer: Renderer, _elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _focusOriginMonitor: FocusOriginMonitor);
     ngAfterViewInit(): void;
     ngOnDestroy(): void;
     /**
-     * Whether the checkbox is checked.
+     * Whether the checkbox is checked. Note that setting `checked` will immediately set
+     * `indeterminate` to false.
      */
     checked: boolean;
     /**
      * Whether the checkbox is indeterminate. This is also known as "mixed" mode and can be used to
      * represent a checkbox with three states, e.g. a checkbox that represents a nested list of
-     * checkable items. Note that whenever checkbox is manually clicked, indeterminate is immediately
-     * set to false.
+     * checkable items. Note that whenever `checked` is set, indeterminate is immediately set to
+     * false. This differs from the web platform in that indeterminate state on native
+     * checkboxes is only remove when the user manually checks the checkbox (rather than setting the
+     * `checked` property programmatically). However, we feel that this behavior is more accommodating
+     * to the way consumers would envision using this component.
      */
     indeterminate: boolean;
     /** The color of the button. Can be `primary`, `accent`, or `warn`. */
@@ -145,8 +146,8 @@ export declare class MdCheckbox extends _MdCheckboxMixinBase implements ControlV
     setDisabledState(isDisabled: boolean): void;
     private _transitionCheckState(newState);
     private _emitChangeEvent();
-    /** Function is called whenever the focus changes for the input element. */
-    private _onInputFocusChange(focusOrigin);
+    /** Informs the component when we lose focus in order to style accordingly */
+    _onInputBlur(): void;
     /** Toggles the `checked` state of the checkbox. */
     toggle(): void;
     /**
@@ -161,6 +162,6 @@ export declare class MdCheckbox extends _MdCheckboxMixinBase implements ControlV
     focus(): void;
     _onInteractionEvent(event: Event): void;
     private _getAnimationClassForCheckStateTransition(oldState, newState);
-    /** Fades out the focus state ripple. */
-    private _removeFocusRipple();
+    /** Fades out the focused state ripple. */
+    private _removeFocusedRipple();
 }

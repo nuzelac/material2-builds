@@ -1,6 +1,4 @@
-import { OnDestroy, ElementRef, NgZone, Renderer2 } from '@angular/core';
-/** Default stroke width as a percentage of the viewBox. */
-export declare const PROGRESS_SPINNER_STROKE_WIDTH = 10;
+import { OnDestroy, ElementRef, NgZone, Renderer } from '@angular/core';
 export declare type ProgressSpinnerMode = 'determinate' | 'indeterminate';
 /**
  * Directive whose purpose is to add the mat- CSS styling to this selector.
@@ -24,8 +22,6 @@ export declare class MdProgressSpinner implements OnDestroy {
     private _mode;
     private _value;
     private _color;
-    /** Stroke width of the progress spinner. By default uses 10px as stroke width. */
-    strokeWidth: number;
     /**
      * Values for aria max and min are only defined as numbers when in a determinate mode.  We do this
      * because voiceover does not report the progress indicator as indeterminate if the aria min
@@ -51,7 +47,7 @@ export declare class MdProgressSpinner implements OnDestroy {
      * mode is bound to the host as the attribute host.
      */
     mode: ProgressSpinnerMode;
-    constructor(_ngZone: NgZone, _elementRef: ElementRef, _renderer: Renderer2);
+    constructor(_ngZone: NgZone, _elementRef: ElementRef, _renderer: Renderer);
     /**
      * Animates the circle from one percentage value to another.
      *
@@ -76,6 +72,13 @@ export declare class MdProgressSpinner implements OnDestroy {
      * DOM attribute on the `<path>`.
      */
     private _renderArc(currentValue, rotation?);
+    /**
+     * Updates the color of the progress-spinner by adding the new palette class to the element
+     * and removing the old one.
+     */
+    private _updateColor(newColor);
+    /** Sets the given palette class on the component element. */
+    private _setElementColor(color, isAdd);
 }
 /**
  * <md-spinner> component.
@@ -84,6 +87,6 @@ export declare class MdProgressSpinner implements OnDestroy {
  * indeterminate <md-progress-spinner> instance.
  */
 export declare class MdSpinner extends MdProgressSpinner implements OnDestroy {
-    constructor(elementRef: ElementRef, ngZone: NgZone, renderer: Renderer2);
+    constructor(elementRef: ElementRef, ngZone: NgZone, renderer: Renderer);
     ngOnDestroy(): void;
 }

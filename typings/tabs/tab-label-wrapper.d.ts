@@ -1,11 +1,12 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, Renderer } from '@angular/core';
 /**
  * Used in the `md-tab-group` view to display tab labels.
  * @docs-private
  */
 export declare class MdTabLabelWrapper {
     elementRef: ElementRef;
-    constructor(elementRef: ElementRef);
+    private _renderer;
+    constructor(elementRef: ElementRef, _renderer: Renderer);
     /** Whether the tab label is disabled.  */
     private _disabled;
     /** Whether the element is disabled. */

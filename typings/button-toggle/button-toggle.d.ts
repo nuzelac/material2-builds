@@ -1,5 +1,6 @@
-import { ElementRef, Renderer2, EventEmitter, OnInit, QueryList, AfterViewInit } from '@angular/core';
+import { ElementRef, Renderer, OnInit, QueryList, AfterViewInit } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
 import { UniqueSelectionDispatcher, FocusOriginMonitor } from '../core';
 /** Acceptable types for a button toggle. */
 export declare type ToggleType = 'checkbox' | 'radio';
@@ -51,7 +52,8 @@ export declare class MdButtonToggleGroup implements AfterViewInit, ControlValueA
     /** Whether the toggle group is selected. */
     selected: MdButtonToggle;
     /** Event emitted when the group's value changes. */
-    change: EventEmitter<MdButtonToggleChange>;
+    readonly change: Observable<MdButtonToggleChange>;
+    private _change;
     private _updateButtonToggleNames();
     private _updateSelectedButtonToggleFromValue();
     /** Dispatch change event with current selection and group value. */
@@ -124,8 +126,9 @@ export declare class MdButtonToggle implements OnInit {
     /** Whether the button is disabled. */
     disabled: boolean;
     /** Event emitted when the group value changes. */
-    change: EventEmitter<MdButtonToggleChange>;
-    constructor(toggleGroup: MdButtonToggleGroup, toggleGroupMultiple: MdButtonToggleGroupMultiple, _buttonToggleDispatcher: UniqueSelectionDispatcher, _renderer: Renderer2, _elementRef: ElementRef, _focusOriginMonitor: FocusOriginMonitor);
+    private _change;
+    readonly change: Observable<MdButtonToggleChange>;
+    constructor(toggleGroup: MdButtonToggleGroup, toggleGroupMultiple: MdButtonToggleGroupMultiple, _buttonToggleDispatcher: UniqueSelectionDispatcher, _renderer: Renderer, _elementRef: ElementRef, _focusOriginMonitor: FocusOriginMonitor);
     ngOnInit(): void;
     /** Focuses the button. */
     focus(): void;

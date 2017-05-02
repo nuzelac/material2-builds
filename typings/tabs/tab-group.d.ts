@@ -1,4 +1,4 @@
-import { EventEmitter, QueryList, ElementRef, Renderer2 } from '@angular/core';
+import { QueryList, ElementRef, Renderer } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { MdTab } from './tab';
 import 'rxjs/add/operator/map';
@@ -34,14 +34,18 @@ export declare class MdTabGroup {
     selectedIndex: number;
     /** Position of the tab header. */
     headerPosition: MdTabHeaderPosition;
-    /** Output to enable support for two-way binding on `[(selectedIndex)]` */
+    /** Output to enable support for two-way binding on ([selectedIndex]) */
     readonly selectedIndexChange: Observable<number>;
+    private _onFocusChange;
+    private _onAddLayer;
     /** Event emitted when focus has changed within a tab group. */
-    focusChange: EventEmitter<MdTabChangeEvent>;
+    readonly focusChange: Observable<MdTabChangeEvent>;
+    readonly addLayer: Observable<any>;
+    private _onSelectChange;
     /** Event emitted when the tab selection has changed. */
-    selectChange: EventEmitter<MdTabChangeEvent>;
+    readonly selectChange: Observable<MdTabChangeEvent>;
     private _groupId;
-    constructor(_renderer: Renderer2);
+    constructor(_renderer: Renderer);
     /**
      * After the content is checked, this component knows what tabs have been defined
      * and what the selected index should be. This is where we can know exactly what position
@@ -55,6 +59,7 @@ export declare class MdTabGroup {
      */
     ngAfterViewChecked(): void;
     _focusChanged(index: number): void;
+    _addLayer($event: any): void;
     private _createChangeEvent(index);
     /** Returns a unique id for each tab label element */
     _getTabLabelId(i: number): string;

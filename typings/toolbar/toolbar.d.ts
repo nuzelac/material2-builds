@@ -1,11 +1,11 @@
-import { ElementRef, Renderer2 } from '@angular/core';
+import { ElementRef, Renderer } from '@angular/core';
 export declare class MdToolbarRow {
 }
 export declare class MdToolbar {
-    private _elementRef;
-    private _renderer;
+    private elementRef;
+    private renderer;
     private _color;
-    constructor(_elementRef: ElementRef, _renderer: Renderer2);
+    constructor(elementRef: ElementRef, renderer: Renderer);
     /** The color of the toolbar. Can be primary, accent, or warn. */
     color: string;
     private _updateColor(newColor);

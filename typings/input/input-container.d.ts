@@ -1,4 +1,4 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, QueryList, Renderer2 } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, ElementRef, EventEmitter, QueryList, Renderer } from '@angular/core';
 import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
 /** Type for the available floatPlaceholder values. */
 export declare type FloatPlaceholderType = 'always' | 'never' | 'auto';
@@ -8,21 +8,21 @@ export declare type FloatPlaceholderType = 'always' | 'never' | 'auto';
  */
 export declare class MdPlaceholder {
 }
-/** Hint text to be shown underneath the input. */
+/** The hint directive, used to tag content as hint labels (going under the input). */
 export declare class MdHint {
     align: 'start' | 'end';
     id: string;
 }
-/** Single error message to be shown underneath the input. */
+/** Directive, used to display a single error message under the input. */
 export declare class MdErrorDirective {
 }
-/** Prefix to be placed the the front of the input. */
+/** The input prefix. */
 export declare class MdPrefix {
 }
-/** Suffix to be placed at the end of the input. */
+/** The input suffix. */
 export declare class MdSuffix {
 }
-/** Marker for the input element that `MdInputContainer` is wrapping. */
+/** The input directive, used to mark the input that `MdInputContainer` is wrapping. */
 export declare class MdInputDirective {
     private _elementRef;
     private _renderer;
@@ -57,7 +57,7 @@ export declare class MdInputDirective {
     readonly empty: boolean;
     private readonly _uid;
     private _neverEmptyInputTypes;
-    constructor(_elementRef: ElementRef, _renderer: Renderer2, _ngControl: NgControl);
+    constructor(_elementRef: ElementRef, _renderer: Renderer, _ngControl: NgControl);
     /** Focuses the input element. */
     focus(): void;
     _onFocus(): void;
@@ -71,10 +71,10 @@ export declare class MdInputDirective {
     private _isTextarea();
 }
 /**
- * Container for text inputs that applies Material Design styling and behavior.
+ * Component that represents a text input. It encapsulates the <input> HTMLElement and
+ * improve on its behaviour, along with styling it according to the Material Design.
  */
 export declare class MdInputContainer implements AfterViewInit, AfterContentInit {
-    _elementRef: ElementRef;
     private _changeDetectorRef;
     private _parentForm;
     private _parentFormGroup;
@@ -84,9 +84,6 @@ export declare class MdInputContainer implements AfterViewInit, AfterContentInit
     color: 'primary' | 'accent' | 'warn';
     /** @deprecated Use color instead. */
     dividerColor: "accent" | "primary" | "warn";
-    /** Whether we should hide the required marker. */
-    hideRequiredMarker: any;
-    private _hideRequiredMarker;
     /** Whether the floating label should always float or not. */
     readonly _shouldAlwaysFloat: boolean;
     /** Whether the placeholder can float or not. */
@@ -106,7 +103,7 @@ export declare class MdInputContainer implements AfterViewInit, AfterContentInit
     _hintChildren: QueryList<MdHint>;
     _prefixChildren: QueryList<MdPrefix>;
     _suffixChildren: QueryList<MdSuffix>;
-    constructor(_elementRef: ElementRef, _changeDetectorRef: ChangeDetectorRef, _parentForm: NgForm, _parentFormGroup: FormGroupDirective);
+    constructor(_changeDetectorRef: ChangeDetectorRef, _parentForm: NgForm, _parentFormGroup: FormGroupDirective);
     ngAfterContentInit(): void;
     ngAfterViewInit(): void;
     /** Determines whether a class from the NgControl should be forwarded to the host element. */

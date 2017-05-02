@@ -1,6 +1,7 @@
+import { ModuleWithProviders } from '@angular/core';
 export { Dir, LayoutDirection, RtlModule } from './rtl/dir';
 export { ObserveContentModule, ObserveContent } from './observe-content/observe-content';
-export { MdOptionModule, MdOption, MdOptionSelectionChange } from './option/option';
+export { MdOptionModule, MdOption } from './option/option';
 export { Portal, PortalHost, BasePortalHost, ComponentPortal, TemplatePortal } from './portal/portal';
 export { PortalHostDirective, TemplatePortalDirective, PortalModule } from './portal/portal-directives';
 export { DomPortalHost } from './portal/dom-portal-host';
@@ -36,6 +37,7 @@ export * from './selection/index';
 export { coerceBooleanProperty } from './coercion/boolean-property';
 export { coerceNumberProperty } from './coercion/number-property';
 export { CompatibilityModule, NoConflictStyleCompatibilityMode } from './compatibility/compatibility';
-export { MdCommonModule } from './common-behaviors/common-module';
 export declare class MdCoreModule {
+    /** @deprecated */
+    static forRoot(): ModuleWithProviders;
 }

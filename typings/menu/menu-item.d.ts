@@ -1,14 +1,15 @@
-import { ElementRef } from '@angular/core';
+import { ElementRef, Renderer } from '@angular/core';
 import { Focusable } from '../core/a11y/focus-key-manager';
 /**
  * This directive is intended to be used inside an md-menu tag.
  * It exists mostly to set the role attribute.
  */
 export declare class MdMenuItem implements Focusable {
+    private _renderer;
     private _elementRef;
     /** Whether the menu item is disabled */
     private _disabled;
-    constructor(_elementRef: ElementRef);
+    constructor(_renderer: Renderer, _elementRef: ElementRef);
     /** Focuses the menu item. */
     focus(): void;
     /** Whether the menu item is disabled. */
