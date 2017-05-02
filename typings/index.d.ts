@@ -11,4 +11,3 @@ export { SCROLL_DISPATCHER_PROVIDER as ɵd, SCROLL_DISPATCHER_PROVIDER_FACTORY a
 export { Scrollable as ɵl } from './core/overlay/scroll/scrollable';
 export { RippleRenderer as ɵe } from './core/ripple/ripple-renderer';
 export { MdGridAvatarCssMatStyler as ɵo, MdGridTile as ɵm, MdGridTileFooterCssMatStyler as ɵq, MdGridTileHeaderCssMatStyler as ɵp, MdGridTileText as ɵn } from './grid-list/grid-tile';
-export { MdTabRight as ɵr } from './tabs/tab-right';

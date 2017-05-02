@@ -1,12 +1,10 @@
 import { TemplatePortal } from '../core/portal/portal';
 import { ViewContainerRef, TemplateRef, OnInit } from '@angular/core';
 import { MdTabLabel } from './tab-label';
-import { MdTabRight } from './tab-right';
 export declare class MdTab implements OnInit {
     private _viewContainerRef;
     /** Content for the tab label given by <ng-template md-tab-label>. */
     templateLabel: MdTabLabel;
-    templateRight: MdTabRight;
     /** Template inside the MdTab view that contains an <ng-content>. */
     _content: TemplateRef<any>;
     /** The plain text label for the tab, used when there is no template label. */
